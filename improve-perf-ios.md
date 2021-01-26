@@ -72,9 +72,9 @@ github "algolia/instantsearch-ios" ~> 2.0 # for access to everything
 
 ## Caching
 
-You can easily cache the results of the search queries by enabling the search cache. The results will be cached for a defined amount of time (default: 2 min). There is no pre-caching mechanism but you can simulate it by making a preemptive search query.
+Enable the search cache to easily cache the results of the search queries. The results are cached for a defined amount of time with a default of two minutes. Simulate a pre-caching mechanism by making a preemptive search query.
 
-By default, the cache is disabled.
+Cache is disabled by default.
 
 ```swift
 // Enable the search cache with default settings.
