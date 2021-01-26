@@ -46,7 +46,7 @@ searcher.strategy = strategy
 
 #### Writing your own strategy
 
-Implementing your own strategy is just a matter of implementing the `RequestStrategy` protocol, which contains only one method: `performSearch(from:userInfo:with:)`. The `Searcher` calls the strategy when the `search(...)` method is invoked, providing the search metadata via the `userInfo` parameter, and a block that the strategy should call when it decides to perform the search.
+Implement the **RequestStrategy** protocol, which contains one method, `performSearch(from:userInfo:with:)`. When the `search(...)` method is invoked, the Searcher calls the strategy and provides the search metadata via the `userInfo` parameter.
 
 
 ## Optimize build size
