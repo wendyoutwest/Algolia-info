@@ -51,7 +51,7 @@ Implement the **RequestStrategy** protocol, which contains one method, `performS
 
 ## Optimize build size
 
-In some cases, you might not need to use our widget system, and just want to use the core parts of InstantSearch. In that case, you can decide to download only specific parts of the library.
+In some cases it is better to use the core parts of InstantSearch and download only specific parts of the library.
 
 ### CocoaPods
 
