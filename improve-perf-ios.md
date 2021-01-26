@@ -1,18 +1,18 @@
 # Improve performance
 
-## Mitigate the impact of slow network in your search application.
+Mitigate the impact of slow network in your search application.
 
 ### Debouncing
 
-"Debouncing" is the process of ignoring too frequent events, keeping only the last one in a series of adjacent events.
+Debouncing is the process of ignoring overly frequent events, keeping only the last one in a series of adjacent events.
 
-The `Debouncer` class provides a generic way of debouncing calls. It can be useful to avoid triggering too many search requests, for example when a UI widget is continuously firing updates (e.g. a slider).
+The `Debouncer` class provides a generic way of debouncing calls. It is useful in order to avoid triggering too many search requests, for example, when a UI widget is continuously firing updates (e.g. a slider).
 
 ### Throttling
 
-Throttling works in a similar fashion as debouncing, except it ensures a constant throughput. When throttling, calls are delayed no more than a given amount of time before being fired. In other words, at regular intervals, the throttler will fire the latest call. This way, no matter how many calls are made, exactly one per interval is fired.
+Throttling works in a similar fashion to debouncing, yet it ensures a constant throughput.
 
-Throttling is achieved via the `Throttler` class.
+The `Throttler` class delays calls a given amount of time before they are fired. At regular intervals, the throttler fires the latest call. No matter how many calls are made, exactly one call per interval is fired.
 
 ### Request strategy
 
