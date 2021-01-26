@@ -85,12 +85,12 @@ InstantSearch.shared.searchCacheEnabled = true
 InstantSearch.shared.searchCacheExpiringTimeInterval = 300
 ```
 
-## Queries Per Second (QPS)
+## Queries per second (QPS)
 
-[Search operations](<%= app_data.instantsearch.links.faq.operations %>) are limited by the [maximum QPS](<%= app_data.instantsearch.links.faq.qps %>) (the allowed number of queries performed per second) of the plan.
+[Search operations](<%= app_data.instantsearch.links.faq.operations %>) are limited by the [maximum QPS](<%= app_data.instantsearch.links.faq.qps %>) (the number of queries performed per second per the plan).
 
-Every time you press a key in InstantSearch using the SearchBox, we count one operation. Then, depending on the widgets you will be adding to your search interface, you may have more operations being counted on each keystroke. For example, if you have a search made out of a SearchBox, a Menu, and a RefinementList, then every keystroke will trigger one operation. But as soon as a user refines the Menu or RefinementList, it will trigger a second operation on each keystroke.
+Every key that you press in InstantSearch counts as one operation. Depending on the widgets in your search interface, you might have more operations counted for each keystroke. For example, if you have a search consisting of a SearchBox, a Menu, and a RefinementList,  every keystroke triggers one operation. When a user refines the Menu or RefinementList, it triggers a second operation for each keystroke.
 
-A good rule to keep in mind is that most search interfaces using InstantSearch will trigger one operation per keystroke. Then every refined widget (clicked widget) will add one more operation to the total count.
+Most search interfaces using InstantSearch trigger one operation per keystroke. Every refined widget (clicked widget) adds one operation to the total count.
 
-In case you have issue with the QPS you can consider implement a debounced [`SearchBox`](/doc/api-reference/widgets/search-box/ios/).
+If issues with the QPS arise, consider implementing a debounced [`SearchBox`](/doc/api-reference/widgets/search-box/ios/).
