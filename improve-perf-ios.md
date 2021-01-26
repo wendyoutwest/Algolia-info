@@ -24,15 +24,15 @@ The `Searcher` class accepts an optional **strategy delegate** that takes care o
 
 #### Adaptive network
 
-The library provides one request strategy implementation: `AdaptiveNetworkStrategy`. This strategy monitors the response time of every request, and based on the observed response times, switches between various modes: **realtime**, **throttled** and **manual**.
+The library provides one request strategy implementation, **AdaptiveNetworkStrategy**. This strategy monitors the response time of every request, and based on the observed response times, switches between various modes: **realtime**, **throttled** and **manual**.
 
-In **realtime mode**, which is the default, all requests are fired immediately. This is typically what you want in an as-you-type search context, and provides the optimal user experience when the network conditions are good.
+**Realtime mode** is the default and all requests are fired immediately. This is best for an as-you-type search context and provides the optimal user experience when the network conditions are good.
 
-As soon as the network starts to degrade, however, things get more complicated: not only may the requests take too long to complete, but if the bandwidth is not sufficient, the response time may even get slower and slower, as requests stack up inside the pipeline. To fight this effect, the **throttled mode** delays requests, dropping them along the way, to ensure a maximum throughput. Furthermore, the throttling delay is dynamically adjusted so that the search throughput more or less matches the current network's capabilities.
+**Throttle mode** is best when the network starts to degrade. Throttle mode delays requests, dropping them along the way, to ensure a maximum throughput. The throttling delay is dynamically adjusted so that the search throughput matches the current network's capabilities as closely as possible. Throttle mode avoids slow response time and avoids requests stacking up inside the pipeline. 
 
-If the network is very bad, though, as-you-type search stops being the right option altogether. Instead of having users stare at a spinning wheel forever, it's better to disable as-you-type, and inform the users that they need to explicitly submit their searches. That's what the **manual mode** does: all non-final searches are dropped.
+**Manual mode** is necessary when the network is extremely slow. it's better to disable as-you-type, and inform the users that they need to explicitly submit their searches. In manual mode, all non-final searches are dropped.
 
-Using the adaptive network strategy first requires monitoring response times using a `ResponseTimeStats`. Then, you create a new `AdaptiveNetworkStrategy` using those statistics, and assigning it to a `Searcher`:
+The **adaptive network** strategy requires monitoring response times using a **ResponseTimeStats**, an `AdaptiveNetworkStrategy`, and a `Searcher`.
 
 ```swift
 let searcher = /* your searcher */
@@ -41,7 +41,7 @@ let strategy = AdaptiveNetworkStrategy(stats: stats)
 searcher.strategy = strategy
 ```
 
-**Note:** *As is customary for delegates, a `Searcher` does not retain its strategy. You must therefore ensure that its lifetime exceeds that of the searcher.*
+**Note:** A Searcher does not retain its strategy. The lifetime must exceed that of the searcher.
 
 
 #### Writing your own strategy
