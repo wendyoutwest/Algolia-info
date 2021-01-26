@@ -16,11 +16,11 @@ The `Throttler` class delays calls a given amount of time before they are fired.
 
 ### Request strategy
 
-By default, a `Searcher` will launch a request every time you call `search(...)`. That's what you want, right?
+By default, a Searcher launches a request every time you call `search(...)`.
 
-Well, not always. When network conditions are bad, for example (high latency, poor bandwidth, packet loss...), the network may not be able to cope with as-you-type search, which could lead to a poor user experience.
+Note that when network conditions are bad, for example with high latency, poor bandwidth, or packet loss, the network may not be able to cope with as-you-type search, which leads to a poor user experience.
 
-That's why the `Searcher` class accepts an optional **strategy delegate** that, when provided, will take care of deciding how to perform searches. This delegate can decide to drop requests, to throttle them, or even alter their metadata.
+The `Searcher` class accepts an optional **strategy delegate** that takes care of deciding how to perform searches. This delegate can decide to drop requests, to throttle them, or even alter their metadata.
 
 #### Adaptive network
 
