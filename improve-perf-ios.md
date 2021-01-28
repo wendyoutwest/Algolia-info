@@ -1,20 +1,20 @@
 # Improve performance
 
-Mitigate the impact of slow network in your search application.
+Mitigate the impact of a slow network in your search application.
 
-### Debouncing
+## Debouncing
 
 Debouncing is the process of ignoring overly frequent events, keeping only the last one in a series of adjacent events.
 
 The `Debouncer` class provides a generic way of debouncing calls. It is useful in order to avoid triggering too many search requests, for example, when a UI widget is continuously firing updates (e.g. a slider).
 
-### Throttling
+## Throttling
 
 Throttling works in a similar fashion to debouncing, yet it ensures a constant throughput.
 
 The `Throttler` class delays calls a given amount of time before they are fired. At regular intervals, the throttler fires the latest call. No matter how many calls are made, exactly one call per interval is fired.
 
-### Request strategy
+## Request strategy
 
 By default, a Searcher launches a request every time you call `search(...)`.
 
@@ -22,17 +22,17 @@ Note that when network conditions are bad, for example with high latency, poor b
 
 The `Searcher` class accepts an optional **strategy delegate** that takes care of deciding how to perform searches. This delegate can decide to drop requests, to throttle them, or even alter their metadata.
 
-#### Adaptive network
+### Adaptive network
 
 The library provides one request strategy implementation, **AdaptiveNetworkStrategy**. This strategy monitors the response time of every request, and based on the observed response times, switches between various modes: **realtime**, **throttled** and **manual**.
 
-**Realtime mode** is the default and all requests are fired immediately. This is best for an as-you-type search context and provides the optimal user experience when the network conditions are good.
+**Realtime mode** is the default and all requests are fired immediately. This is best for an as-you-type search context and provides the optimal user experience when network conditions are good.
 
 **Throttle mode** is best when the network starts to degrade. Throttle mode delays requests, dropping them along the way, to ensure a maximum throughput. The throttling delay is dynamically adjusted so that the search throughput matches the current network's capabilities as closely as possible. Throttle mode avoids slow response time and avoids requests stacking up inside the pipeline. 
 
-**Manual mode** is necessary when the network is extremely slow. it's better to disable as-you-type, and inform the users that they need to explicitly submit their searches. In manual mode, all non-final searches are dropped.
+**Manual mode** is necessary when the network is extremely slow. It's better to disable as-you-type and inform the users that they need to explicitly submit their searches. In manual mode, all non-final searches are dropped.
 
-The **adaptive network** strategy requires monitoring response times using a **ResponseTimeStats**, an `AdaptiveNetworkStrategy`, and a `Searcher`.
+The **adaptive network** strategy requires monitoring response times using a `ResponseTimeStats`, an `AdaptiveNetworkStrategy`, and a `Searcher`.
 
 ```swift
 let searcher = /* your searcher */
@@ -41,12 +41,12 @@ let strategy = AdaptiveNetworkStrategy(stats: stats)
 searcher.strategy = strategy
 ```
 
-**Note:** A Searcher does not retain its strategy. The lifetime must exceed that of the searcher.
+**Note:** A `Searcher` does not retain its strategy. The lifetime must exceed that of the searcher.
 
 
-#### Writing your own strategy
+## Writing your own strategy
 
-Implement the **RequestStrategy** protocol, which contains one method, `performSearch(from:userInfo:with:)`. When the `search(...)` method is invoked, the Searcher calls the strategy and provides the search metadata via the `userInfo` parameter.
+Implement the `RequestStrategy` protocol, which contains one method, `performSearch(from:userInfo:with:)`. When the `search(...)` method is invoked, the Searcher calls the strategy and provides the search metadata via the `userInfo` parameter.
 
 
 ## Optimize build size
