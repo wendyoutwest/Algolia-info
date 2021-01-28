@@ -12,15 +12,15 @@ The `Debouncer` class provides a generic way of debouncing calls. It is useful i
 
 Throttling works in a similar fashion to debouncing, yet it ensures a constant throughput.
 
-The `Throttler` class delays calls a given amount of time before they are fired. At regular intervals, the throttler fires the latest call. No matter how many calls are made, exactly one call per interval is fired.
+The `Throttler` class delays calls for a given amount of time before they are fired. The throttler fires the latest call at regular intervals. No matter how many calls are made, exactly one call per interval is fired.
 
 ## Request strategy
 
 By default, a Searcher launches a request every time you call `search(...)`.
 
-Note that when network conditions are bad, for example with high latency, poor bandwidth, or packet loss, the network may not be able to cope with as-you-type search, which leads to a poor user experience.
+When network conditions are bad, for example with high latency, poor bandwidth, or packet loss, the network may not be able to cope with as-you-type search, which leads to a poor user experience.
 
-The `Searcher` class accepts an optional **strategy delegate** that takes care of deciding how to perform searches. This delegate can decide to drop requests, to throttle them, or even alter their metadata.
+The `Searcher` class accepts an optional **strategy delegate** that takes care of deciding how to perform searches. This delegate can decide to drop requests, throttle them, or even alter their metadata.
 
 ### Adaptive network
 
@@ -30,7 +30,7 @@ The library provides one request strategy implementation, **AdaptiveNetworkStrat
 
 **Throttle mode** is best when the network starts to degrade. Throttle mode delays requests, dropping them along the way, to ensure a maximum throughput. The throttling delay is dynamically adjusted so that the search throughput matches the current network's capabilities as closely as possible. Throttle mode avoids slow response time and avoids requests stacking up inside the pipeline. 
 
-**Manual mode** is necessary when the network is extremely slow. It's better to disable as-you-type and inform the users that they need to explicitly submit their searches. In manual mode, all non-final searches are dropped.
+**Manual mode** is necessary when the network is extremely slow. It's better to disable as-you-type and inform the users that they need to explicitly submit their searches. In manual mode, only final searches display.
 
 The **adaptive network** strategy requires monitoring response times using a `ResponseTimeStats`, an `AdaptiveNetworkStrategy`, and a `Searcher`.
 
