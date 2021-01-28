@@ -26,7 +26,7 @@ The `Searcher` class accepts an optional **strategy delegate** that takes care o
 
 The library provides one request strategy implementation, **AdaptiveNetworkStrategy**. This strategy monitors the response time of every request, and based on the observed response times, switches between various modes: **realtime**, **throttled** and **manual**.
 
-**Realtime mode** is the default and all requests are fired immediately. This is best for an as-you-type search context and provides the optimal user experience when network conditions are good.
+**Realtime mode** is the default, and all requests are fired immediately. This is best for an as-you-type search context and provides the optimal user experience when network conditions are good.
 
 **Throttle mode** is best when the network starts to degrade. Throttle mode delays requests, dropping them along the way, to ensure a maximum throughput. The throttling delay is dynamically adjusted so that the search throughput matches the current network's capabilities as closely as possible. Throttle mode avoids slow response time and avoids requests stacking up inside the pipeline. 
 
@@ -89,7 +89,7 @@ InstantSearch.shared.searchCacheExpiringTimeInterval = 300
 
 [Search operations](<%= app_data.instantsearch.links.faq.operations %>) are limited by the [maximum QPS](<%= app_data.instantsearch.links.faq.qps %>) (the number of queries performed per second per the plan).
 
-Every key that you press in InstantSearch counts as one operation. Depending on the widgets in your search interface, you might have more operations counted for each keystroke. For example, if you have a search consisting of a SearchBox, a Menu, and a RefinementList,  every keystroke triggers one operation. When a user refines the Menu or RefinementList, it triggers a second operation for each keystroke.
+Every key that you press in InstantSearch counts as one operation. Depending on the widgets in your search interface, you might have more operations counted for each keystroke. For example, if you have a search consisting of a SearchBox, a Menu, and a RefinementList,  every keystroke triggers one operation. When you refine the Menu or RefinementList, it triggers a second operation for each keystroke.
 
 Most search interfaces using InstantSearch trigger one operation per keystroke. Every refined widget (clicked widget) adds one operation to the total count.
 
